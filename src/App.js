@@ -1,7 +1,7 @@
 function App() {
   return (
     <div>
-			Game of Life
+      Game of Life
     </div>
   );
 }
