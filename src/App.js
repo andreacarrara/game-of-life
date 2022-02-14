@@ -1,8 +1,6 @@
 function App() {
   return (
-    <div>
-      Game of Life
-    </div>
+    <div>Game of Life</div>
   );
 }
 
