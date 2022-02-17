@@ -13,7 +13,7 @@ const neighbours = [
   [1, -1],
   [1, 0],
   [1, 1]
-]
+];
 
 function App() {
   const [grid, setGrid] = useState(() => {
@@ -54,7 +54,7 @@ function App() {
               gridCopy[i][j] = 0;
             else if (grid[i][j] === 0 && numNeighbours === 3)
               gridCopy[i][j] = 1;
-        }
+          }
       });
     });
 
