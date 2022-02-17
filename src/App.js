@@ -5,6 +5,7 @@ const numCols = 20;
 
 function App() {
   const [grid, setGrid] = useState(() => {
+    // Initialize grid
     const rows = [];
     for (let i = 0; i < numRows; i++)
       rows[i] = new Array(numCols).fill(0);
@@ -27,6 +28,7 @@ function App() {
             style={{
               width: 20,
               height: 20,
+              // Set color based on status
               backgroundColor: cell ? 'black' : 'white'
             }}
           />
