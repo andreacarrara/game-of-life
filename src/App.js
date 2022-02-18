@@ -15,15 +15,19 @@ const neighbours = [
   [1, 1]
 ];
 
-function App() {
-  const [grid, setGrid] = useState(() => {
-    // Initialize grid
-    const rows = [];
+const generateEmptyGrid = () => {
+  const rows = [];
     for (let i = 0; i < numRows; i++)
       rows[i] = new Array(numCols).fill(0);
 
-    return rows;
-  });
+  return rows;
+};
+
+function App() {
+  const [grid, setGrid] = useState(() => {
+    // Initialize grid
+    return generateEmptyGrid();
+   });
 
   const [running, setRunning] = useState(false);
 
@@ -71,6 +75,14 @@ function App() {
         }}
       >
         {running ? 'Stop' : 'Start'}
+      </button>
+      <button
+        onClick={() => {
+          // Reset grid
+          setGrid(generateEmptyGrid);
+        }}
+      >
+        Reset
       </button>
       <div style={{
         backgroundColor: 'black',
