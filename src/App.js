@@ -15,7 +15,7 @@ const neighbours = [
   [1, 1]
 ];
 
-const generateEmptyGrid = () => {
+const getEmptyGrid = () => {
   const rows = [];
     for (let i = 0; i < numRows; i++)
       rows[i] = new Array(numCols).fill(0);
@@ -25,8 +25,7 @@ const generateEmptyGrid = () => {
 
 function App() {
   const [grid, setGrid] = useState(() => {
-    // Initialize grid
-    return generateEmptyGrid();
+    return getEmptyGrid();
    });
 
   const [running, setRunning] = useState(false);
@@ -34,12 +33,10 @@ function App() {
   const runningRef = useRef(running);
   runningRef.current = running;
 
-  // Simulate game
   const runSimulation = useCallback(() => {
     if (!runningRef.current)
       return;
 
-    // Update grid
     setGrid(grid => {
       return produce(grid, gridCopy => {
         for (let i = 0; i < numRows; i++)
@@ -63,7 +60,7 @@ function App() {
     });
 
    setTimeout(runSimulation, 200);
-  }, []);
+  }, []); // Always memoize
 
   return (
     <>
@@ -78,8 +75,7 @@ function App() {
       </button>
       <button
         onClick={() => {
-          // Reset grid
-          setGrid(generateEmptyGrid);
+          setGrid(getEmptyGrid);
         }}
       >
         Reset
@@ -95,9 +91,8 @@ function App() {
           row.map((cell, j) => (
             <div
               key={`${i}-${j}`}
-              // Toggle status
               onClick={() => {
-                // Update grid
+                // Toggle status
                 setGrid(produce(grid, gridCopy => {
                   gridCopy[i][j] = grid[i][j]? 0 : 1;
                 }));
