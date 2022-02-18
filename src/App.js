@@ -25,6 +25,7 @@ const getEmptyGrid = () => {
 
 function App() {
   const [grid, setGrid] = useState(() => {
+    // Initialize grid
     return getEmptyGrid();
    });
 
@@ -37,6 +38,7 @@ function App() {
     if (!runningRef.current)
       return;
 
+    // Update grid
     setGrid(grid => {
       return produce(grid, gridCopy => {
         for (let i = 0; i < numRows; i++)
@@ -66,6 +68,7 @@ function App() {
     <>
       <button
         onClick={() => {
+          // Run simulation
           setRunning(!running);
           runningRef.current = true; // Prevent race condition
           runSimulation();
@@ -75,6 +78,7 @@ function App() {
       </button>
       <button
         onClick={() => {
+          // Reset grid
           setGrid(getEmptyGrid);
         }}
       >
