@@ -34,6 +34,8 @@ function App() {
   const runningRef = useRef(running);
   runningRef.current = running;
 
+  const [generation, setGeneration] = useState(0);
+
   const runSimulation = useCallback(() => {
     if (!runningRef.current)
       return;
@@ -61,6 +63,11 @@ function App() {
       });
     });
 
+    // Update generation
+    setGeneration(generation => {
+      return generation + 1;
+    });
+
    setTimeout(runSimulation, 200);
   }, []); // Always memoize
 
@@ -80,10 +87,15 @@ function App() {
         onClick={() => {
           // Reset grid
           setGrid(getEmptyGrid);
+          // Reset generation
+          setGeneration(0);
         }}
       >
         Reset
       </button>
+      <p>
+        Generation: {generation}
+      </p>
       <div style={{
         backgroundColor: 'black',
         border: '1px solid black',
