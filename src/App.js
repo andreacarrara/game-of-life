@@ -107,17 +107,25 @@ function App() {
           row.map((cell, j) => (
             <div
               key={`${i}-${j}`}
-              onClick={() => {
+              onMouseDown={() => {
                 // Toggle status
                 setGrid(produce(grid, gridCopy => {
-                  gridCopy[i][j] = grid[i][j]? 0 : 1;
+                  gridCopy[i][j] = grid[i][j] ? 0 : 1;
                 }));
+              }}
+              onMouseOver={(event) => {
+                if (event.buttons === 1) // Primary button is pressed
+                  // Toggle status
+                  setGrid(produce(grid, gridCopy => {
+                    gridCopy[i][j] = grid[i][j] ? 0 : 1;
+                  }));
               }}
               style={{
                 width: 20,
                 height: 20,
                 // Set color based on status
-                backgroundColor: cell ? 'black' : 'white'
+                backgroundColor: cell ? 'black' : 'white',
+                userSelect: "none" // Prevent dragging
               }}
             />
           ))
