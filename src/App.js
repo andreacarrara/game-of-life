@@ -68,7 +68,7 @@ function App() {
       return generation + 1;
     });
 
-    setTimeout(runSimulation, 200);
+    setTimeout(runSimulation, 200); // Recursive
   }, []); // Always memoize
 
   return (
