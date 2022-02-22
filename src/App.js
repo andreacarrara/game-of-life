@@ -91,6 +91,8 @@ function App() {
         onClick={() => {
           // Reset grid
           setGrid(getEmptyGrid);
+          // Stop simulation
+          setRunning(false);
           // Reset generation
           setGeneration(0);
         }}
