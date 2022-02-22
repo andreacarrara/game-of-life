@@ -1,5 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react';
 import produce from 'immer';
+import Toolbar from './Toolbar';
 
 const numRows = 20;
 const numCols = 20;
@@ -36,6 +37,17 @@ function App() {
 
   const [generation, setGeneration] = useState(0);
 
+  const onRun = () => {
+    // Toggle running
+    setRunning(!running);
+
+    if (!running) {
+      // Run simulation
+      runningRef.current = true; // Prevent race condition
+      runSimulation();
+    }
+  };
+
   const runSimulation = useCallback(() => {
     if (!runningRef.current)
       return;
@@ -63,7 +75,7 @@ function App() {
       });
     });
 
-    // Update generation
+    // Increment generation
     setGeneration(generation => {
       return generation + 1;
     });
@@ -71,37 +83,23 @@ function App() {
     setTimeout(runSimulation, 200); // Recursive
   }, []); // Always memoize
 
+  const onClear = () => {
+    // Clear grid
+    setGrid(getEmptyGrid);
+    // Stop simulation
+    setRunning(false);
+    // Reset generation
+    setGeneration(0);
+  };
+
   return (
     <>
-      <button
-        onClick={() => {
-          // Toggle running
-          setRunning(!running);
-
-          if (!running) {
-            // Run simulation
-            runningRef.current = true; // Prevent race condition
-            runSimulation();
-          }
-        }}
-      >
-        {running ? 'Stop' : 'Start'}
-      </button>
-      <button
-        onClick={() => {
-          // Reset grid
-          setGrid(getEmptyGrid);
-          // Stop simulation
-          setRunning(false);
-          // Reset generation
-          setGeneration(0);
-        }}
-      >
-        Reset
-      </button>
-      <p>
-        Generation: {generation}
-      </p>
+      <Toolbar
+        onRun={onRun}
+        running={running}
+        onClear={onClear}
+        generation={generation}
+      />
       <div style={{
         backgroundColor: 'black',
         border: '1px solid black',
