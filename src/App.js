@@ -37,17 +37,6 @@ function App() {
 
   const [generation, setGeneration] = useState(0);
 
-  const onRun = () => {
-    // Toggle running
-    setRunning(!running);
-
-    if (!running) {
-      // Run simulation
-      runningRef.current = true; // Prevent race condition
-      runSimulation();
-    }
-  };
-
   const runSimulation = useCallback(() => {
     if (!runningRef.current)
       return;
@@ -82,6 +71,17 @@ function App() {
 
     setTimeout(runSimulation, 200); // Recursive
   }, []); // Always memoize
+
+  const onRun = () => {
+    // Toggle running
+    setRunning(!running);
+
+    if (!running) {
+      // Run simulation
+      runningRef.current = true; // Prevent race condition
+      runSimulation();
+    }
+  };
 
   const onClear = () => {
     // Clear grid
