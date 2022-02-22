@@ -75,10 +75,13 @@ function App() {
     <>
       <button
         onClick={() => {
-          // Run simulation
+          // Toggle running
           setRunning(!running);
-          runningRef.current = true; // Prevent race condition
-          runSimulation();
+
+          if (!running) { // Run simulation
+            runningRef.current = true; // Prevent race condition
+            runSimulation();
+          }
         }}
       >
         {running ? 'Stop' : 'Start'}
