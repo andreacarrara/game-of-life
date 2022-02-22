@@ -78,7 +78,8 @@ function App() {
           // Toggle running
           setRunning(!running);
 
-          if (!running) { // Run simulation
+          if (!running) {
+            // Run simulation
             runningRef.current = true; // Prevent race condition
             runSimulation();
           }
