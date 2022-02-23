@@ -17,11 +17,8 @@ const neighbours = [
 ];
 
 const getEmptyGrid = () => {
-  const rows = [];
-    for (let i = 0; i < numRows; i++)
-      rows[i] = new Array(numCols).fill(0);
-
-  return rows;
+  return Array.from({length: numRows}).map(() =>
+    Array.from({length: numCols}).fill(0));
 };
 
 function App() {
@@ -68,8 +65,6 @@ function App() {
     setGeneration(generation => {
       return generation + 1;
     });
-
-    setTimeout(runSimulation, 200); // Recursive
   }, []); // Always memoize
 
   const onRun = () => {
@@ -79,7 +74,7 @@ function App() {
     if (!running) {
       // Run simulation
       runningRef.current = true; // Prevent race condition
-      runSimulation();
+      setInterval(runSimulation, 200); // Repeatedly
     }
   };
 
