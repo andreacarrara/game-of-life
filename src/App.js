@@ -1,9 +1,10 @@
 import React, { useState, useRef, useCallback } from 'react';
-import produce from 'immer';
+import produce from 'immer'; // Used to update grid
 import Toolbar from './Toolbar';
 
 const numRows = 20;
 const numCols = 20;
+const cellSize = 20; // In pixels
 
 const neighbours = [
   [-1, -1],
@@ -65,6 +66,8 @@ function App() {
     setGeneration(generation => {
       return generation + 1;
     });
+
+    setTimeout(runSimulation, 200); // Recursive
   }, []); // Always memoize
 
   const onRun = () => {
@@ -74,7 +77,7 @@ function App() {
     if (!running) {
       // Run simulation
       runningRef.current = true; // Prevent race condition
-      setInterval(runSimulation, 200); // Repeatedly
+      runSimulation();
     }
   };
 
@@ -86,6 +89,14 @@ function App() {
     // Reset generation
     setGeneration(0);
   };
+
+  const onCell = (event, i, j) => {
+    if (event.buttons === 1) // Primary button pressed
+      // Toggle cell status
+      setGrid(produce(grid, gridCopy => {
+        gridCopy[i][j] = grid[i][j] ? 0 : 1;
+      }));
+  }
 
   return (
     <>
@@ -99,30 +110,23 @@ function App() {
         backgroundColor: 'black',
         border: '1px solid black',
         display: 'inline-grid',
-        gridTemplateColumns: `repeat(${numCols}, 20px)`,
+        gridTemplateColumns: `repeat(${numCols}, ${cellSize}px)`,
         gridGap: 1
       }}>
         {grid.map((row, i) =>
           row.map((cell, j) => (
             <div
               key={`${i}-${j}`}
-              onMouseDown={() => {
-                // Toggle status
-                setGrid(produce(grid, gridCopy => {
-                  gridCopy[i][j] = grid[i][j] ? 0 : 1;
-                }));
-              }}
-              onMouseOver={(event) => {
-                if (event.buttons === 1) // Primary button is pressed
-                  // Toggle status
-                  setGrid(produce(grid, gridCopy => {
-                    gridCopy[i][j] = grid[i][j] ? 0 : 1;
-                  }));
-              }}
+              onMouseDown={(event) =>
+                onCell(event, i, j)
+              }
+              onMouseOver={(event) =>
+                onCell(event, i, j)
+              }
               style={{
-                width: 20,
-                height: 20,
-                // Set color based on status
+                width: cellSize,
+                height: cellSize,
+                // Set color based on cell status
                 backgroundColor: cell ? 'black' : 'white',
                 userSelect: "none" // Prevent dragging
               }}
