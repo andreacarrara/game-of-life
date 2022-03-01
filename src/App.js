@@ -51,17 +51,18 @@ function App() {
 
     // Update grid
     setGrid(grid => {
-      return produce(grid, gridCopy => {
-        for (let i = 0; i < numRows; i++)
-          for (let j = 0; j < numCols; j++) {
+      return produce(grid, gridCopy =>
+        grid.forEach((row, i) =>
+          row.forEach((cell, j) => {
             // Check rules
-            let numNeighbours = countNeighbours(grid, i, j);
+            const numNeighbours = countNeighbours(grid, i, j);
             if (numNeighbours < 2 || numNeighbours > 3)
               gridCopy[i][j] = 0;
-            else if (grid[i][j] === 0 && numNeighbours === 3)
+            else if (cell === 0 && numNeighbours === 3)
               gridCopy[i][j] = 1;
-          }
-      });
+          })
+        )
+      );
     });
 
     // Increment generation
@@ -116,7 +117,7 @@ function App() {
         gridGap: 1
       }}>
         {grid.map((row, i) =>
-          row.map((cell, j) => (
+          row.map((cell, j) =>
             <div
               key={`${i}-${j}`}
               onMouseDown={(event) =>
@@ -133,7 +134,7 @@ function App() {
                 userSelect: "none" // Prevent dragging
               }}
             />
-          ))
+          )
         )}
       </div>
     </>
