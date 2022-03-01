@@ -1,9 +1,10 @@
 import React, { useState, useRef, useCallback } from 'react';
-import produce from 'immer'; // Used to update grid
+import { produce } from 'immer'; // Used to update grid
 import Toolbar from './Toolbar';
 
 const numRows = 20;
 const numCols = 20;
+
 const cellSize = 20; // In pixels
 
 const neighbours = [
@@ -23,10 +24,7 @@ const getEmptyGrid = () => {
 };
 
 function App() {
-  const [grid, setGrid] = useState(() => {
-    // Initialize grid
-    return getEmptyGrid();
-   });
+  const [grid, setGrid] = useState(getEmptyGrid);
 
   const [running, setRunning] = useState(false);
 
@@ -34,6 +32,18 @@ function App() {
   runningRef.current = running;
 
   const [generation, setGeneration] = useState(0);
+
+  const countNeighbours = (grid, i, j) => {
+    let numNeighbours = 0;
+    neighbours.forEach(([x, y]) => {
+      const k = i + x;
+      const l = j + y;
+      if (k >= 0 && k < numRows && l >= 0 && l < numCols)
+        numNeighbours += grid[k][l];
+    });
+
+    return numNeighbours;
+  };
 
   const runSimulation = useCallback(() => {
     if (!runningRef.current)
@@ -44,16 +54,8 @@ function App() {
       return produce(grid, gridCopy => {
         for (let i = 0; i < numRows; i++)
           for (let j = 0; j < numCols; j++) {
-            // Count neighbours
-            let numNeighbours = 0;
-            neighbours.forEach(([x, y]) => {
-              const newI = i + x;
-              const newJ = j + y;
-              if (newI >= 0 && newI < numRows && newJ >= 0 && newJ < numCols)
-                numNeighbours += grid[newI][newJ];
-            });
-
             // Check rules
+            let numNeighbours = countNeighbours(grid, i, j);
             if (numNeighbours < 2 || numNeighbours > 3)
               gridCopy[i][j] = 0;
             else if (grid[i][j] === 0 && numNeighbours === 3)
