@@ -36,6 +36,7 @@ function App() {
   const countNeighbours = (grid, i, j) => {
     let numNeighbours = 0;
     neighbours.forEach(([x, y]) => {
+      // Check bounds
       const k = i + x;
       const l = j + y;
       if (k >= 0 && k < numRows && l >= 0 && l < numCols)
