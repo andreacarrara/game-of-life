@@ -12,6 +12,9 @@ function Toolbar(props) {
       <p>
         Generation: {props.generation}
       </p>
+      <h1>
+        Game of Life
+      </h1>
     </>
   );
 }
