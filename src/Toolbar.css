@@ -1,0 +1,35 @@
+.toolbar {
+  padding: 12px 48px;
+  display: flex;
+  align-items: center;
+}
+
+button {
+  margin: 8px; 
+  width: 110px;
+  border: none;
+  border-radius: 10px;
+  background-color: #5271ff;
+  padding: 8px;
+  font: inherit;
+  font-weight: 700;
+  color: white;
+  font-size: 26px;
+}
+
+button:hover {
+  transform: scale(98%);
+  cursor: pointer;
+}
+
+p {
+  margin: 0 48px;
+  font-size: 26px;
+}
+
+h1 {
+  margin: 8px;
+  margin-left: auto;
+  font-weight: 700;
+  font-size: 48px;
+}

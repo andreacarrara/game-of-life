@@ -1,9 +1,15 @@
 import React from 'react';
+import './Toolbar.css';
 
 function Toolbar(props) {
   return (
-    <>
-      <button onClick={props.onRun}>
+    <div className='toolbar'>
+      <button
+        onClick={props.onRun}
+        style={{
+          backgroundColor: props.running ? '#ff5757' : '#7ed957'
+        }}
+      >
         {props.running ? 'Stop' : 'Start'}
       </button>
       <button onClick={props.onClear}>
@@ -15,7 +21,7 @@ function Toolbar(props) {
       <h1>
         Game of Life
       </h1>
-    </>
+    </div>
   );
 }
 
