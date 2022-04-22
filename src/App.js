@@ -1,11 +1,10 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { produce } from 'immer'; // Used to update grid
 import Toolbar from './Toolbar';
+import Grid from './Grid';
 
 const numRows = 20;
 const numCols = 20;
-
-const cellSize = 20; // In pixels
 
 const neighbours = [
   [-1, -1],
@@ -110,34 +109,11 @@ function App() {
         onClear={onClear}
         generation={generation}
       />
-      <div style={{
-        backgroundColor: 'black',
-        border: '1px solid black',
-        display: 'inline-grid',
-        gridTemplateColumns: `repeat(${numCols}, ${cellSize}px)`,
-        gridGap: 1
-      }}>
-        {grid.map((row, i) =>
-          row.map((cell, j) =>
-            <div
-              key={`${i}-${j}`}
-              onMouseDown={(event) =>
-                onCell(event, i, j)
-              }
-              onMouseOver={(event) =>
-                onCell(event, i, j)
-              }
-              style={{
-                width: cellSize,
-                height: cellSize,
-                // Set color based on cell status
-                backgroundColor: cell ? 'black' : 'white',
-                userSelect: "none" // Prevent dragging
-              }}
-            />
-          )
-        )}
-      </div>
+      <Grid
+        numCols={numCols}
+        grid={grid}
+        onCell={onCell}
+      />
     </>
   );
 }
