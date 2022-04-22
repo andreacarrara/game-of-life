@@ -39,7 +39,7 @@ function App() {
       const k = i + x;
       const l = j + y;
       if (k >= 0 && k < numRows && l >= 0 && l < numCols)
-        numNeighbours += grid[k][l];
+        numNeighbours += grid[k][l] ? 1 : 0;
     });
 
     return numNeighbours;
@@ -54,6 +54,10 @@ function App() {
       return produce(grid, gridCopy =>
         grid.forEach((row, i) =>
           row.forEach((cell, j) => {
+            if (cell > 0)
+              // Increment cell iteration
+              gridCopy[i][j] += 1;
+
             // Check rules
             const numNeighbours = countNeighbours(grid, i, j);
             if (numNeighbours < 2 || numNeighbours > 3)
