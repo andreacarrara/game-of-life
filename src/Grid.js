@@ -5,7 +5,6 @@ const cellSize = 30; // In pixels
 const cellColors = ['ffffff', '7ed957', '38b6ff', '5271ff', '8c52ff', 'cb6ce6', 'ff66c4', 'ff914d', 'ff5757', '000000']; // In hexadecimal
 
 function Grid(props) {
-
   const getCellColor = (cell) => {
     if (cell > 9)
       cell = 9;
