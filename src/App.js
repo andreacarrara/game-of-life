@@ -3,8 +3,11 @@ import { produce } from 'immer'; // Used to update grid
 import Toolbar from './Toolbar';
 import Grid from './Grid';
 
-const numRows = 20;
-const numCols = 20;
+const resolution = 33;
+const toolbarHeight = 99;
+
+const numRows = Math.floor((window.innerHeight - toolbarHeight) / resolution);
+const numCols = Math.floor(window.innerWidth / resolution);
 
 const neighbours = [
   [-1, -1],

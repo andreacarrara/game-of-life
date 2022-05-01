@@ -1,6 +1,7 @@
 import React from 'react';
+import './Grid.css';
 
-const cellSize = 20; // In pixels
+const cellSize = 30; // In pixels
 const cellColors = ['ffffff', '7ed957', '38b6ff', '5271ff', '8c52ff', 'cb6ce6', 'ff66c4', 'ff914d', 'ff5757', '000000']; // In hexadecimal
 
 function Grid(props) {
@@ -12,13 +13,12 @@ function Grid(props) {
   };
 
   return (
-    <div style={{
-      backgroundColor: 'black',
-      border: '1px solid black',
-      display: 'inline-grid',
-      gridTemplateColumns: `repeat(${props.numCols}, ${cellSize}px)`,
-      gridGap: 1
-    }}>
+    <div
+      className='grid'
+      style={{
+        gridTemplateColumns: `repeat(${props.numCols}, ${cellSize}px)`
+      }}
+    >
       {props.grid.map((row, i) =>
         row.map((cell, j) =>
           <div
@@ -33,8 +33,7 @@ function Grid(props) {
               width: cellSize,
               height: cellSize,
               // Set color based on cell iteration
-              backgroundColor: getCellColor(cell),
-              userSelect: "none" // Prevent dragging
+              backgroundColor: getCellColor(cell)
             }}
           />
         )

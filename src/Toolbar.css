@@ -6,7 +6,7 @@
 
 button {
   margin: 8px; 
-  width: 110px;
+  min-width: 110px;
   border: none;
   border-radius: 10px;
   background-color: #5271ff;
@@ -25,6 +25,7 @@ button:hover {
 p {
   margin: 0 48px;
   font-size: 26px;
+  white-space: nowrap;
 }
 
 h1 {
@@ -32,4 +33,5 @@ h1 {
   margin-left: auto;
   font-weight: 700;
   font-size: 48px;
+  white-space: nowrap;
 }

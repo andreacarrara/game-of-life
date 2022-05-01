@@ -1,0 +1,7 @@
+.grid {
+  border: 2px solid black;
+  background-color: black;
+  display: inline-grid;
+  grid-gap: 2px;
+  user-select: none;
+}
