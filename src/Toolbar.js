@@ -6,21 +6,31 @@ function Toolbar(props) {
     <div className='toolbar'>
       <button
         onClick={props.onRun}
+        className='control'
         style={{
           backgroundColor: props.running ? '#ff5757' : '#7ed957'
         }}
       >
         {props.running ? 'Stop' : 'Start'}
       </button>
-      <button onClick={props.onClear}>
+      <button
+        onClick={props.onClear}
+        className='control'
+      >
         Clear
       </button>
-      <p>
+      <p className='generation'>
         Generation: {props.generation}
       </p>
-      <h1>
+      <h1 className='header'>
         Game of Life
       </h1>
+      <button
+        onClick={props.onInfo}
+        className='info'
+      >
+        i
+      </button>
     </div>
   );
 }

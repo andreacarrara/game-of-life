@@ -2,6 +2,7 @@ import React, { useState, useRef, useCallback } from 'react';
 import { produce } from 'immer'; // Used to update grid
 import Toolbar from './Toolbar';
 import Grid from './Grid';
+import Modal from './Modal';
 
 const resolution = 33;
 const toolbarHeight = 99;
@@ -34,6 +35,8 @@ function App() {
   runningRef.current = running;
 
   const [generation, setGeneration] = useState(0);
+
+  const [modal, setModal] = useState(true);
 
   const countNeighbours = (grid, i, j) => {
     let numNeighbours = 0;
@@ -106,7 +109,11 @@ function App() {
       setGrid(produce(grid, gridCopy => {
         gridCopy[i][j] = grid[i][j] ? 0 : 1;
       }));
-  }
+  };
+
+  const toggleModal = () => {
+    setModal(!modal);
+  };
 
   return (
     <>
@@ -115,11 +122,16 @@ function App() {
         running={running}
         onClear={onClear}
         generation={generation}
+        onInfo={toggleModal}
       />
       <Grid
         numCols={numCols}
         grid={grid}
         onCell={onCell}
+      />
+      <Modal
+        showing={modal}
+        onClose={toggleModal}
       />
     </>
   );

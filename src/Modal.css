@@ -1,0 +1,88 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 630px;
+  height: 100%;
+  overflow-y: auto;
+  background-color: white;
+  text-align: left;
+  animation-name: slide-in;
+  animation-duration: 200ms;
+  animation-timing-function: ease-out;
+}
+
+@keyframes slide-in {
+  0% {
+    right: -100%;
+  }
+}
+
+.title {
+  margin: 42px 56px 42px 56px;
+  line-height: 66px;
+  font-size: 62px;
+}
+
+.green {
+  color: #7ed957;
+}
+
+.blue {
+  color: #5271ff;
+}
+
+.purple {
+  color: #8c52ff;
+}
+
+.pink {
+  color: #ff66c4;
+}
+
+.orange {
+  color: #ff914d;
+}
+
+.subtitle {
+  margin: 0 56px 0 56px;
+  line-height: 32px;
+  font-size: 24px;
+}
+
+.rules {
+  margin: 0 56px 34px 56px;
+  line-height: 32px;
+  font-size: 24px;
+}
+
+li {
+  margin-bottom: 14px;
+  padding-left: 8px;
+}
+
+.footer {
+  margin: 0 56px 42px 56px;
+  line-height: 32px;
+  font-size: 24px;
+}
+
+a {
+  font-weight: 700;
+  color: black;
+}
+
+.divider {
+  margin: 34px 56px 44px 56px;
+  height: 3px;
+  border: none;
+  background-color: black;
+}

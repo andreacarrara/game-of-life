@@ -5,11 +5,8 @@
 }
 
 button {
-  margin: 8px; 
-  min-width: 110px;
+  margin: 8px;
   border: none;
-  border-radius: 10px;
-  background-color: #5271ff;
   padding: 8px;
   font: inherit;
   font-weight: 700;
@@ -22,16 +19,26 @@ button:hover {
   cursor: pointer;
 }
 
-p {
+.control {
+  min-width: 110px;
+  border-radius: 10px;
+  background-color: #5271ff;
+}
+
+.info {
+  min-width: 48px;
+  border-radius: 24px;
+  background-color: black;
+}
+
+.generation {
   margin: 0 48px;
   font-size: 26px;
   white-space: nowrap;
 }
 
-h1 {
-  margin: 8px;
-  margin-left: auto;
-  font-weight: 700;
+.header {
+  margin: 8px 24px 8px auto;
   font-size: 48px;
   white-space: nowrap;
 }
