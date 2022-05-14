@@ -30,15 +30,15 @@ function Modal(props) {
             How exciting, right? I promise you it is really cool, so please keep reading!
           </p>
           <hr className='divider' />
-          <p className='rules'>
-            Every cell interacts with its eight neighbours following these simple rules:
+          <div className='rules'>
+            <p>Every cell interacts with its eight neighbours following these four simple rules:</p>
             <ul>
               <li>Live cells with fewer than two live neighbours die by underpopulation.</li>
               <li>Live cells with two or three live neighbours live on.</li>
               <li>Live cells with more than three live neighbours die by overpopulation.</li>
               <li>Dead cells with three live neighbours become a live cell by reproduction.</li>
             </ul>
-          </p>
+          </div>
           <p className='rules'>
             That's it! Click on cells to make them alive, then press Start to simulate the game.
             You can even click while it is running, or drag your cursor on multiple cells!
