@@ -34,7 +34,7 @@ function Modal(props) {
             <p>Every cell interacts with its eight neighbours following these four simple rules:</p>
             <ul>
               <li>Live cells with fewer than two live neighbours die by underpopulation.</li>
-              <li>Live cells with two or three live neighbours live on.</li>
+              <li>Live cells with two or three live neighbours live to the next generation.</li>
               <li>Live cells with more than three live neighbours die by overpopulation.</li>
               <li>Dead cells with three live neighbours become a live cell by reproduction.</li>
             </ul>
