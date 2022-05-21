@@ -26,7 +26,7 @@ function Modal(props) {
             <span className='orange'>t</span>
           </h1>
           <p className='subtitle'>
-            The Game of Life is a zero-player cellular automation.
+            The Game of Life is a zero-player cellular automaton.
             How exciting, right? I promise you it is really cool, so please keep reading!
           </p>
           <hr className='divider' />
