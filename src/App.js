@@ -4,11 +4,14 @@ import Toolbar from './Toolbar';
 import Grid from './Grid';
 import Modal from './Modal';
 
+const windowHeight = window.innerHeight;
+const windowWidth = window.innerWidth;
+
 const resolution = 33;
 const toolbarHeight = 99;
 
-const numRows = Math.floor((window.innerHeight - toolbarHeight) / resolution);
-const numCols = Math.floor(window.innerWidth / resolution);
+const numRows = Math.floor((windowHeight - toolbarHeight) / resolution);
+const numCols = Math.floor(windowWidth / resolution);
 
 const neighbours = [
   [-1, -1],
@@ -115,7 +118,7 @@ function App() {
     setModal(!modal);
   };
 
-  return (
+  return windowWidth > 1024 ? (
     <>
       <Toolbar
         onRun={onRun}
@@ -134,6 +137,10 @@ function App() {
         onClose={toggleModal}
       />
     </>
+  ) : (
+    <p>
+      Mobile is not yet supported, sorry!
+    </p>
   );
 }
 
