@@ -15,7 +15,7 @@ button {
 }
 
 button:hover {
-  transform: scale(98%);
+  transform: scale(97%);
   cursor: pointer;
 }
 

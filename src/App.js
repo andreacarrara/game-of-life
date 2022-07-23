@@ -1,8 +1,8 @@
-import React, { useState, useRef, useCallback } from 'react';
-import { produce } from 'immer'; // Used to update grid
-import Toolbar from './Toolbar';
-import Grid from './Grid';
-import Modal from './Modal';
+import React, { useState, useRef, useCallback } from "react";
+import { produce } from "immer"; // Used to update grid
+import Toolbar from "./Toolbar/Toolbar";
+import Grid from "./Grid/Grid";
+import Modal from "./Modal/Modal";
 
 const windowHeight = window.innerHeight;
 const windowWidth = window.innerWidth;
@@ -21,12 +21,13 @@ const neighbours = [
   [0, 1],
   [1, -1],
   [1, 0],
-  [1, 1]
+  [1, 1],
 ];
 
 const getEmptyGrid = () => {
-  return Array.from({length: numRows}).map(() =>
-    Array.from({length: numCols}).fill(0));
+  return Array.from({ length: numRows }).map(() =>
+    Array.from({ length: numCols }).fill(0)
+  );
 };
 
 function App() {
@@ -55,12 +56,11 @@ function App() {
   };
 
   const runSimulation = useCallback(() => {
-    if (!runningRef.current)
-      return;
+    if (!runningRef.current) return;
 
     // Update grid
-    setGrid(grid => {
-      return produce(grid, gridCopy =>
+    setGrid((grid) => {
+      return produce(grid, (gridCopy) =>
         grid.forEach((row, i) =>
           row.forEach((cell, j) => {
             if (cell > 0)
@@ -69,17 +69,15 @@ function App() {
 
             // Check rules
             const numNeighbours = countNeighbours(grid, i, j);
-            if (numNeighbours < 2 || numNeighbours > 3)
-              gridCopy[i][j] = 0;
-            else if (cell === 0 && numNeighbours === 3)
-              gridCopy[i][j] = 1;
+            if (numNeighbours < 2 || numNeighbours > 3) gridCopy[i][j] = 0;
+            else if (cell === 0 && numNeighbours === 3) gridCopy[i][j] = 1;
           })
         )
       );
     });
 
     // Increment generation
-    setGeneration(generation => {
+    setGeneration((generation) => {
       return generation + 1;
     });
 
@@ -107,11 +105,14 @@ function App() {
   };
 
   const onCell = (event, i, j) => {
-    if (event.buttons === 1) // Primary button pressed
+    if (event.buttons === 1)
+      // Primary button pressed
       // Toggle cell status
-      setGrid(produce(grid, gridCopy => {
-        gridCopy[i][j] = grid[i][j] ? 0 : 1;
-      }));
+      setGrid(
+        produce(grid, (gridCopy) => {
+          gridCopy[i][j] = grid[i][j] ? 0 : 1;
+        })
+      );
   };
 
   const toggleModal = () => {
@@ -127,20 +128,12 @@ function App() {
         generation={generation}
         onInfo={toggleModal}
       />
-      <Grid
-        numCols={numCols}
-        grid={grid}
-        onCell={onCell}
-      />
-      <Modal
-        showing={modal}
-        onClose={toggleModal}
-      />
+      <Grid numCols={numCols} grid={grid} onCell={onCell} />
+      <Modal showing={modal} onClose={toggleModal} />
     </>
   ) : (
-    <p>
-      Mobile is not yet supported, sorry!
-    </p>
+    // Mobile warning
+    <p>Mobile is not yet supported, sorry!</p>
   );
 }
 
